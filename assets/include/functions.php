@@ -34,9 +34,63 @@ function validar()
     ]);
     $result = $stmt->rowCount();
     if ($result > 0) {
-        return 200;
+        echo '<div class="alert alert-success" role="alert">Enviado com Sucesso!</div>';
     } else {
-        return 400;
-        //var_dump( $stmt->errorInfo() );
+        echo '<div class="alert alert-danger" role="alert">Erro ao Enviar</div>';
+        echo '<div class="alert alert-danger" role="alert">' . $stmt->errorInfo() . '</div>';
+    }
+}
+function list_cadastro()
+{
+    $pdo = pdo();
+    $stmt = $pdo->prepare("SELECT * FROM cadastro ORDER BY id DESC");
+    $stmt->execute();
+    $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $dados;
+}
+function cadastro($id)
+{
+    $pdo = pdo();
+    $stmt = $pdo->prepare("SELECT * FROM cadastro WHERE id = :id");
+    $stmt->execute([':id' => $id]);
+    $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $dados;
+}
+function update_cadastro()
+{
+    $pdo = pdo();
+
+    $stmt = $pdo->prepare("UPDATE cadastro SET nome = :nome, email = :email, cpf = :cpf, telefone = :telefone, data_nascimento = :data_nascimento, itvl_doacao = :itvl_doacao, valor_doacao = :valor_doacao, forma_pagamento = :forma_pagamento, endereco = :endereco WHERE id = :id");
+    $stmt->execute([
+        ":id" => $_POST['id'],
+        ":nome" => $_POST['nome'],
+        ":email" => $_POST['email'],
+        ":cpf" => $_POST['cpf'],
+        ":telefone" => $_POST['telefone'],
+        ":data_nascimento" => $_POST['data_nascimento'],
+        ":itvl_doacao" => $_POST['itvl_doacao'],
+        ":valor_doacao" => $_POST['valor_doacao'],
+        ":forma_pagamento" => $_POST['forma_pagamento'],
+        ":endereco" => $_POST['endereco'],
+    ]);
+    $result = $stmt->rowCount();
+    if ($result > 0) {
+        echo '<div class="alert alert-success" role="alert">Enviado com Sucesso!</div>';
+    } else {
+        echo '<div class="alert alert-danger" role="alert">Erro ao Enviar</div>';
+        echo '<div class="alert alert-danger" role="alert">' . $stmt->errorInfo() . '</div>';
+    }
+}
+function delete()
+{
+    $pdo = pdo();
+    $stmt = $pdo->prepare("DELETE FROM cadastro WHERE id = :id");
+    $stmt->execute([':id' => $_POST['id']]);
+    $result = $stmt->rowCount();
+    if ($result > 0) {
+        echo '<div class="alert alert-success" role="alert">Excluido com Sucesso!</div>';
+    } else {
+        echo '<div class="alert alert-danger" role="alert">Erro ao Excluir</div>';
+        echo '<div class="alert alert-danger" role="alert">' . $stmt->errorInfo() . '</div>';
     }
 }
