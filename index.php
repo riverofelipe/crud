@@ -44,10 +44,10 @@ include('assets/include/header.php');
                         <div class="form-group">
                             <label>Intevalo de Doação</label>
                             <select class="form-control" name="itvl_doacao" required>
-                                <option value="1" value="único">Único</option>
-                                <option value="2" value="bimestral">Bimestral</option>
-                                <option value="3" value="semestral">Semestral</option>
-                                <option value="3" value="anual">Anual</option>
+                                <option value="único">Único</option>
+                                <option value="bimestral">Bimestral</option>
+                                <option value="semestral">Semestral</option>
+                                <option value="anual">Anual</option>
                             </select>
                         </div>
 
@@ -59,8 +59,8 @@ include('assets/include/header.php');
                         <div class="form-group">
                             <label>Forma de Pagamento</label>
                             <select class="form-control" name="forma_pagamento" required>
-                                <option value="1" value="débito">Débito</option>
-                                <option value="2" value="crédito">Crédito</option>
+                                <option value="débito">Débito</option>
+                                <option value="crédito">Crédito</option>
                             </select>
                         </div>
 
